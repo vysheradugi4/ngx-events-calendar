@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { EmptyHeaderComponent } from 'projects/ngx-events-calendar/src/lib/ngx-events-calendar/ngx-events-calendar.component';
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app';
+export class AppComponent implements OnInit {
+  public datesWithEvent$ = new BehaviorSubject<Array<Date>>([null]);
+
+  ngOnInit() {
+    this.datesWithEvent$.next([new Date()]);
+  }
+
+  onCalendarDateSelected(date: Date) {
+    console.log('Selected date: ', date);
+  }
 }

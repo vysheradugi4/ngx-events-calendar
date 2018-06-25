@@ -121,6 +121,46 @@
           }
         }
       }
+    },
+    "ngx-events-calendar": {
+      "root": "projects/ngx-events-calendar",
+      "sourceRoot": "projects/ngx-events-calendar/src",
+      "projectType": "library",
+      "prefix": "",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-events-calendar/tsconfig.lib.json",
+            "project": "projects/ngx-events-calendar/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ngx-events-calendar/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-events-calendar/src/test.ts",
+            "tsConfig": "projects/ngx-events-calendar/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-events-calendar/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-events-calendar/tsconfig.lib.json",
+              "projects/ngx-events-calendar/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-events-calendar-app"

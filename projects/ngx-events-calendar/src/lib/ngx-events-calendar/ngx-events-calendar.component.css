@@ -1,0 +1,11 @@
+.mat-calendar-body-cell-content {
+  cursor: default !important;
+}
+
+.mat-calendar-body-cell {
+  cursor: default !important;
+}
+
+.mat-calendar-body-selected {
+  cursor: pointer !important;
+}
