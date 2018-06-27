@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NgxEventsCalendarModule } from 'projects/ngx-events-calendar/src/public_api';
+import { MatCardModule } from '@angular/material';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { NgxEventsCalendarModule } from 'projects/ngx-events-calendar/src/public
   imports: [
     BrowserModule,
     NgxEventsCalendarModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

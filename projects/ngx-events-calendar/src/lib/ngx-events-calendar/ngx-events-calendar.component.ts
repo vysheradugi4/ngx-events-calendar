@@ -9,13 +9,10 @@ import {
   OnDestroy,
   ElementRef,
   Renderer2,
-  ComponentFactory,
-  Injector,
-  ComponentFactoryResolver,
   ViewEncapsulation,
 } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, switchMap, startWith } from 'rxjs/operators';
 import { MatCalendar } from '@angular/material';
 import { DatePipe } from '@angular/common';
 
@@ -62,26 +59,31 @@ export class NgxEventsCalendarComponent implements OnInit, AfterViewInit, OnDest
   }
 
   ngAfterViewInit(): void {
-    // Show dates with event.
-    this._eventsSubscription = this.datesWithEvent$
-      .subscribe((dates: Array<Date>) => {
-        dates.map(date => {
-          const ariaLabelDate = this._datePipe.transform(date, 'longDate');
+      this._calendar.stateChanges
+        .pipe(
+            startWith(null),
+            switchMap(() => {
+                return this.datesWithEvent$;
+            })
+        )
+        .subscribe((dates: Array<Date>) => {
+            dates.map(date => {
+              const ariaLabelDate = this._datePipe.transform(date, 'longDate');
 
-          // Save all dates with event in set.
-          this._selectedDates.add(ariaLabelDate);
+              // Save all dates with event in set.
+              this._selectedDates.add(ariaLabelDate);
 
-          const el = this._elRef.nativeElement
-            .querySelector(`[aria-label="${ariaLabelDate}"]`);
+              const el = this._elRef.nativeElement
+                .querySelector(`[aria-label="${ariaLabelDate}"]`);
 
-          if (el) {
-            this._renderer.addClass(
-              el.querySelector('.mat-calendar-body-cell-content'),
-              'mat-calendar-body-selected'
-            );
-          }
-        });
-      });
+              if (el) {
+                this._renderer.addClass(
+                  el.querySelector('.mat-calendar-body-cell-content'),
+                  'mat-calendar-body-selected'
+                );
+              }
+            });
+          });
 
     // Intercept click on date.
     this._calendarSubscription = this._calendar.selectedChange

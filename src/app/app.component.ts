@@ -9,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   public datesWithEvent$ = new BehaviorSubject<Array<Date>>([null]);
+  public currentMonth = new Date();
 
   ngOnInit() {
     this.datesWithEvent$.next([new Date()]);

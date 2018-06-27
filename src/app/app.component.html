@@ -1,6 +1,23 @@
-<ngx-events-calendar
-    [hideHeader]="true"
-    [month]="currentMonth"
-    [datesWithEvent$]="datesWithEvent$"
-    (selectedDate)="onCalendarDateSelected($event)">
-</ngx-events-calendar>
+<div class="container">
+    <mat-card class="calendar">
+        <h2 class="calendar__title">
+            Events in {{ currentMonth | date: 'MMMM' }}
+        </h2>
+        <ngx-events-calendar
+            class="calendar__body"
+            [hideHeader]="true"
+            [month]="currentMonth"
+            [datesWithEvent$]="datesWithEvent$"
+            (selectedDate)="onCalendarDateSelected($event)">
+        </ngx-events-calendar>
+    </mat-card>
+
+    <mat-card class="calendar">
+        <ngx-events-calendar
+            class="calendar__body"
+            [month]="currentMonth"
+            [datesWithEvent$]="datesWithEvent$"
+            (selectedDate)="onCalendarDateSelected($event)">
+        </ngx-events-calendar>
+    </mat-card>
+</div>

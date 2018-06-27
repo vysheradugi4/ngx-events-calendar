@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+}
+
+.calendar {
+    width: 300px;
+    margin: 20px;
+}
+
+.calendar__title {
+    text-align: center;
+}
